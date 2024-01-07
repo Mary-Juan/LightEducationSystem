@@ -1,7 +1,16 @@
+using LightEducationSystem.Entities;
+using LightEducationSystem.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+#region IOC
+
+
+
+#endregion
 
 var app = builder.Build();
 

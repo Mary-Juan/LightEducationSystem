@@ -8,9 +8,9 @@ namespace LightEducationSystem.Utilities
 {
     public static class FileHandler
     {
-        public static void SaveToFile(string data, string filePath)
+        public static void SaveToFile(string[] data, string filePath)
         {
-            File.AppendAllText(filePath, data + Environment.NewLine);
+            File.WriteAllLines(filePath, data);
         }
 
         public static string[] ReadFile(string filePath)
