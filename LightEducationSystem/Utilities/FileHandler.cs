@@ -6,23 +6,16 @@ using System.Threading.Tasks;
 
 namespace LightEducationSystem.Utilities
 {
-    public class FileHandler
+    public static class FileHandler
     {
-        private string _filePath;
-
-        public FileHandler(string filePath)
+        public static void SaveToFile(string data, string filePath)
         {
-            _filePath = filePath;
+            File.AppendAllText(filePath, data + Environment.NewLine);
         }
 
-        public void SaveToFile(string data)
+        public static string[] ReadFile(string filePath)
         {
-            File.AppendAllText(_filePath, data + Environment.NewLine);
-        }
-
-        public string[] ReadFile()
-        {
-            return File.ReadAllLines(_filePath);
+            return File.ReadAllLines(filePath);
         }
     }
 }
