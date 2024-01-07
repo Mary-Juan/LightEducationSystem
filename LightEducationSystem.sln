@@ -5,10 +5,6 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightEducationSystem", "LightEducationSystem\LightEducationSystem.csproj", "{ED85FEA7-948D-45AE-BD23-B51AE868E7C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightEducationSystem.DataLayer", "LightEducationSystem.DataLayer\LightEducationSystem.DataLayer.csproj", "{498E2626-2B11-4BF6-A956-B379210978B5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightEducationSystem.Model", "LightEducationSystem.Model\LightEducationSystem.Model.csproj", "{ECFAF434-F523-4F3B-9982-4D44FECC86A2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{ED85FEA7-948D-45AE-BD23-B51AE868E7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED85FEA7-948D-45AE-BD23-B51AE868E7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED85FEA7-948D-45AE-BD23-B51AE868E7C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{498E2626-2B11-4BF6-A956-B379210978B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{498E2626-2B11-4BF6-A956-B379210978B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{498E2626-2B11-4BF6-A956-B379210978B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{498E2626-2B11-4BF6-A956-B379210978B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ECFAF434-F523-4F3B-9982-4D44FECC86A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECFAF434-F523-4F3B-9982-4D44FECC86A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECFAF434-F523-4F3B-9982-4D44FECC86A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECFAF434-F523-4F3B-9982-4D44FECC86A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
