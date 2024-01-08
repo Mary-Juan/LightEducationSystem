@@ -8,20 +8,30 @@ namespace LightEducationSystem.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly string _peopleFilePath;
-        private readonly IGenericRepository<Person> _personRepository;
+        private readonly IProfessorRepository _professorRepository;
+        private readonly string _professorFilePath;
+
+        private readonly IStudentRepository _studentRepository;
+        private readonly string _studentFilePath;
 
         public AuthenticationService(IConfiguration configuration)
         {
-            _peopleFilePath = configuration["FileAddresses:PeopleFilePath"];
-            _personRepository = new GenericRepository<Person>(_peopleFilePath);
+            _professorFilePath = configuration["FileAddresses:ProfessorFilePath"];
+            _professorRepository = new ProfessorRepository(_professorFilePath);
+
+            _studentFilePath = configuration["FileAddresses:StudentFilePath"];
+            _studentRepository = new StudentRepository(_studentFilePath);
         }
 
         public Person? Login(LoginViewModel login)
         {
-            List<Person> people = _personRepository.GetAll();
-            Person currentUser = people.FirstOrDefault(p => p.Email == login.Email && p.Password == login.Password);
-            
+            List<Student> students = _studentRepository.GetAll();
+            List<Professor> professors = _professorRepository.GetAll();
+            Person currentUser = students.FirstOrDefault(p => p.Email == login.Email && p.Password == login.Password);
+
+            if (currentUser == null) 
+                currentUser = professors.FirstOrDefault(p => p.Email == login.Email && p.Password == login.Password);
+
             if (currentUser == null)
             {
                 return null;
@@ -39,7 +49,7 @@ namespace LightEducationSystem.Services
                 {
                     Student student = new Student()
                     {
-                        Id = _personRepository.GetAll().Count() + 1,
+                        Id = _studentRepository.GetAll().Count() + 1,
                         UserName = register.UserName,
                         Password = register.Password,
                         Email = register.Email,
@@ -50,14 +60,14 @@ namespace LightEducationSystem.Services
                         }
                     };
 
-                    _personRepository.Create(student);
-                    _personRepository.SaveChanges();
+                    _studentRepository.Create(student);
+                    _studentRepository.SaveChanges();
                 }
                 else if (register.RoleId == 1)
                 {
                     Professor professor = new Professor()
                     {
-                        Id = _personRepository.GetAll().Count() + 1,
+                        Id = _professorRepository.GetAll().Count() + 1,
                         UserName = register.UserName,
                         Password = register.Password,
                         Email = register.Email,
@@ -68,8 +78,8 @@ namespace LightEducationSystem.Services
                         }
                     };
 
-                    _personRepository.Create(professor);
-                    _personRepository.SaveChanges();
+                    _professorRepository.Create(professor);
+                    _professorRepository.SaveChanges();
                 }
 
                 return true;
