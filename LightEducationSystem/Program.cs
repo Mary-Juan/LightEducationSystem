@@ -1,4 +1,5 @@
 using LightEducationSystem.Entities;
+using LightEducationSystem.Services;
 using LightEducationSystem.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,8 @@ builder.Services.AddControllersWithViews();
 
 #region IOC
 
-
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 #endregion
 

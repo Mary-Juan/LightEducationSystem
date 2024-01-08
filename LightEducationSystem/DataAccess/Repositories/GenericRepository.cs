@@ -53,7 +53,7 @@ namespace LightEducationSystem.DataAccess.Repositories
 
         public T GetByID(int id)
         {
-            return _objects.FirstOrDefault(o => o.Id == id);
+            return _objects.FirstOrDefault(o => o.Id == id && o.IsDeleted != false);
         }
 
         public void SaveChanges()

@@ -19,7 +19,12 @@ namespace LightEducationSystem.Services
 
         public T DeSerializeToObject(string jsonObj)
         {
-            return JsonConvert.DeserializeObject<T>(jsonObj);
+            var settings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.Objects
+            };
+
+            return JsonConvert.DeserializeObject<T>(jsonObj, settings);
         }
 
         public string[] SerializeList(List<T> objects)
@@ -36,7 +41,12 @@ namespace LightEducationSystem.Services
 
         public string SerializeObject(T obj)
         {
-            return JsonConvert.SerializeObject(obj);
+            var settings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.Objects
+            };
+
+            return JsonConvert.SerializeObject(obj, settings);
         }
     }
 }
