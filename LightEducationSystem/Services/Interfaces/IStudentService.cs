@@ -11,5 +11,6 @@ namespace LightEducationSystem.Services.Interfaces
         public List<TrainingCourseViewModel> GetProfessorTrainingCourse(int  professionId);
         public TrainingCourseViewModel GetTrainingCourseDetail(int trainingCourseId);
         public ProfessorViewModel GetProfessorDetail(int professionId);
+        public StudentViewModel GetStudentDetails(int studentId);
     }
 }

@@ -42,7 +42,8 @@ namespace LightEducationSystem.Services
                 Capacity = x.Capacity,
                 ProfessorId = x.ProfessorId,
                 Title = x.Title,
-                Time = x.Time
+                Time = x.Time,
+                RemainingCapacity = x.Capacity - x.TrainingCourseStudentCardsId.Count()
             }).ToList();
         }
 
@@ -54,7 +55,8 @@ namespace LightEducationSystem.Services
                 ProfessorId=professionId,
                 Capacity = t.Capacity,
                 Time = t.Time,
-                Title = t.Title
+                Title = t.Title,
+                RemainingCapacity = t.Capacity - t.TrainingCourseStudentCardsId.Count()
             }).ToList();
             
             return new ProfessorViewModel()
@@ -69,6 +71,18 @@ namespace LightEducationSystem.Services
         {
             var professor = GetProfessorDetail(professionId);
             return professor.TrainingCourses;
+        }
+
+        public StudentViewModel GetStudentDetails(int studentId)
+        {
+            var student = _studentRepository.GetByID(studentId);
+
+            return new StudentViewModel()
+            {
+                Email = student.Email,
+                UserName = student.UserName,
+                StudentCards = GetStudentTrainingCourse(studentId),
+            };
         }
 
         public List<StudentCardViewModel> GetStudentTrainingCourse(int studentId)
@@ -93,7 +107,8 @@ namespace LightEducationSystem.Services
                 Time = trainingCourse.Time,
                 Capacity = trainingCourse.Capacity,
                 ProfessorId = trainingCourse.ProfessorId,
-                Title = trainingCourse.Title
+                Title = trainingCourse.Title,
+                RemainingCapacity = trainingCourse.Capacity - trainingCourse.TrainingCourseStudentCardsId.Count()
             };
         }
 
@@ -101,6 +116,11 @@ namespace LightEducationSystem.Services
         {
             try
             {
+                var trainingCourse = _trainingCourseRepository.GetByID(trainingCourseId);
+
+                if (trainingCourse.Capacity <= trainingCourse.TrainingCourseStudentCardsId.Count)
+                    return false;
+
                 var trainingCourseStudentCard = new TrainingCourseStudentCard()
                 {
                     StudentId = studentId,
@@ -116,7 +136,7 @@ namespace LightEducationSystem.Services
                 student.TrainingCourseStudentCardsId.Add(trainingCourseStudentCard.Id);
                 _studentRepository.SaveChanges();
 
-                var trainingCourse = _trainingCourseRepository.GetByID(trainingCourseId);
+                
                 trainingCourse.TrainingCourseStudentCardsId.Add(trainingCourseStudentCard.Id);
                 _trainingCourseRepository.SaveChanges();
 

@@ -6,5 +6,6 @@
         public int Capacity { get; set; }
         public TimeSpan Time { get; set; }
         public int ProfessorId { get; set; }
+        public int RemainingCapacity { get; set; }
     }
 }
