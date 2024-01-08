@@ -5,5 +5,6 @@
         public string Title { get; set; }
         public int Capacity { get; set; }
         public TimeSpan Time { get; set; }
+        public int ProfessorId { get; set; }
     }
 }

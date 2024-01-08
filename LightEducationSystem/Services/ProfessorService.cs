@@ -25,7 +25,7 @@ namespace LightEducationSystem.Services
             _trainingCourseFilePath = configuration["FileAddresses:TrainingCourseFilePath"];
             _trainingCourseRepository = new GenericRepository<TrainingCourse>(_trainingCourseFilePath);
 
-            _trainingCourseStudentCardFilePath = configuration["FileAddresses:TrainingCourseFilePath"];
+            _trainingCourseStudentCardFilePath = configuration["FileAddresses:TrainingCourseStudentCardFilePath"];
             _trainingCourseStudentCardRepository = new GenericRepository<TrainingCourseStudentCard>(_trainingCourseStudentCardFilePath);
 
             _professorFilePath = configuration["FileAddresses:ProfessorFilePath"];
