@@ -7,6 +7,6 @@ namespace LightEducationSystem.Services.Interfaces
     {
         public bool AddTrainingCourse(TrainingCourseViewModel trainingCourse, int professorId);
         public List<Student> GetStudentsOfTrainingCourse(int trainingCourseId);
-        public bool RateStudent(int dtudentId);
+        public bool RateStudent(int studentId, int score);
     }
 }
