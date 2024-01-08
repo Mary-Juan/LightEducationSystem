@@ -1,4 +1,6 @@
-﻿namespace LightEducationSystem.DataAccess.Repositories.Interfaces
+﻿using LightEducationSystem.Services.Interfaces;
+
+namespace LightEducationSystem.DataAccess.Repositories.Interfaces
 {
     public interface IGenericRepository<T>
     {

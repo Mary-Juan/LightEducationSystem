@@ -8,6 +8,6 @@ namespace LightEducationSystem.Entities
 {
     public class Student : Person
     {
-        public List<TrainingCourseStudentCard> StudentCards { get; set; }  = new List<TrainingCourseStudentCard>();
+        public List<int> TrainingCourseStudentCardsId { get; set; }  = new List<int>();
     }
 }

@@ -10,8 +10,8 @@ namespace LightEducationSystem.Entities
     {
         public string Title { get; set; }
         public int Capacity { get; set; }
-        public string ProfessorId { get; set; }
-        public ICollection<TrainingCourseStudentCard> Cards { get; set; }
+        public int ProfessorId { get; set; }
+        public List<int> TrainingCourseStudentCardsId { get; set; } = new List<int>();
         public TimeSpan Time { get; set; }
     }
 }

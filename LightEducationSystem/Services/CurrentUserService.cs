@@ -9,11 +9,11 @@ namespace LightEducationSystem.Services
     public class CurrentUserService : ICurrentUserService
     {
         private readonly string _currentUserFilePath;
-        private readonly IGenericRepository<Person> _currentUserRepository;>
+        private readonly IGenericRepository<Person> _currentUserRepository;
 
         public CurrentUserService(IConfiguration configuration)
         {
-            _currentUserFilePath = configuration["FileAddresses:PeopleFilePath"];
+            _currentUserFilePath = configuration["FileAddresses:CurrentUserFilePath"];
             _currentUserRepository = new GenericRepository<Person>(_currentUserFilePath);
         }
 

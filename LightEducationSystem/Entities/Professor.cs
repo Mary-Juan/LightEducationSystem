@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace LightEducationSystem.Entities
 {
-    internal class Professor : Person
+    public class Professor : Person
     {
-        public ICollection<TrainingCourse> Courses { get; set; }
+        public List<int> TrainingCoursesId { get; set; } = new List<int>();
 
     }
 }
