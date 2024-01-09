@@ -3,6 +3,7 @@ using LightEducationSystem.Services.Interfaces;
 using LightEducationSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LightEducationSystem.Controllers
 {
@@ -49,6 +50,20 @@ namespace LightEducationSystem.Controllers
 
         public IActionResult Register()
         {
+            ViewBag.Roles = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Value = "2",
+                    Text = "Student"
+                },
+                new SelectListItem()
+                {
+                    Value = "1",
+                    Text = "Professor"
+                }
+            };
+
             return View();
         }
 

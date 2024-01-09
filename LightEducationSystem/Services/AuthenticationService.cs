@@ -45,7 +45,7 @@ namespace LightEducationSystem.Services
         {
             try
             {
-                if (register.RoleId == 2)
+                if (register.RoleId == "2")
                 {
                     Student student = new Student()
                     {
@@ -63,7 +63,7 @@ namespace LightEducationSystem.Services
                     _studentRepository.Create(student);
                     _studentRepository.SaveChanges();
                 }
-                else if (register.RoleId == 1)
+                else if (register.RoleId == "1")
                 {
                     Professor professor = new Professor()
                     {
