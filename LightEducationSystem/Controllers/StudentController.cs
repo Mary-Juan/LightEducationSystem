@@ -17,6 +17,12 @@ namespace LightEducationSystem.Controllers
 
         public IActionResult Index(int studentId)
         {
+            if (studentId != _currentUser.Id)
+            {
+                ViewBag.UnAuthorizedError = "You've not been identified. please Login.";
+                return RedirectToAction("Login", "Home");
+            }
+
             var student = _studentService.GetStudentDetails;
 
             if (student == null)
@@ -38,7 +44,7 @@ namespace LightEducationSystem.Controllers
                     return RedirectToAction("Index", "Student");
                 else
                 {
-                    ViewData["FullCapacityError"] = "The capacity of this course is full";
+                    ViewBag.FullCapacityError = "The capacity of this course is full";
                     return RedirectToAction("GetAllTrainingCourse");
                 }    
             }catch

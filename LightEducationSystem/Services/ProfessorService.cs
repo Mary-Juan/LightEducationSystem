@@ -63,16 +63,27 @@ namespace LightEducationSystem.Services
             }
         }
 
-        public List<Student> GetStudentsOfTrainingCourse(int trainingCourseId)
+        public List<StudentViewModel> GetStudentsOfTrainingCourse(int trainingCourseId)
         {
-            List<Student> students = new List<Student>();
+            List<StudentViewModel> students = new List<StudentViewModel>();
             TrainingCourse trainingCourse = _trainingCourseRepository.GetByID(trainingCourseId);
 
             foreach(var cardId in trainingCourse.TrainingCourseStudentCardsId)
             {
                 var card = _trainingCourseStudentCardRepository.GetByID(cardId);
                 var student = _studentRepository.GetByID(card.StudentId);
-                students.Add(student);
+                students.Add(new StudentViewModel()
+                {
+                    Email = student.Email,
+                    UserName = student.UserName,
+                    StudentCards = _trainingCourseStudentCardRepository.GetAll().Where(c => student.TrainingCourseStudentCardsId.Contains(c.Id)).Select(c => new StudentCardViewModel
+                    {
+                        Score = c.Score,
+                        StudentId = student.Id,
+                        StudentName = student.UserName,
+                        TrainingCourseId = c.Id
+                    }).ToList(),
+                });
             }
 
             return students;
@@ -92,6 +103,26 @@ namespace LightEducationSystem.Services
                 throw new Exception(ex.Message);
             }
 
+        }
+
+        public ProfessorViewModel GetProfessorDetail(int professorId)
+        {
+            var professor = _professorRepository.GetByID(professorId);
+            List<TrainingCourseViewModel> trainingCourses = _trainingCourseRepository.GetAll().Where(t => professor.TrainingCoursesId.Contains(t.Id)).Select(t => new TrainingCourseViewModel
+            {
+                ProfessorId = professorId,
+                Capacity = t.Capacity,
+                Time = t.Time,
+                Title = t.Title,
+                RemainingCapacity = t.Capacity - t.TrainingCourseStudentCardsId.Count()
+            }).ToList();
+
+            return new ProfessorViewModel()
+            {
+                Email = professor.Email,
+                UserName = professor.UserName,
+                TrainingCourses = trainingCourses,
+            };
         }
     }
 }
