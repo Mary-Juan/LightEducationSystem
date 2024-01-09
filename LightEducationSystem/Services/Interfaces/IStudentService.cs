@@ -8,9 +8,9 @@ namespace LightEducationSystem.Services.Interfaces
         public List<TrainingCourseViewModel> GetAllTrainingCourses();
         public bool RegisterTrainingCourse(int studentId, int trainingCourseId);
         public List<StudentCardViewModel> GetStudentTrainingCourse(int studentId);
-        public List<TrainingCourseViewModel> GetProfessorTrainingCourse(int  professionId);
+        public List<TrainingCourseViewModel> GetProfessorTrainingCourse(int professorId);
         public TrainingCourseViewModel GetTrainingCourseDetail(int trainingCourseId);
-        public ProfessorViewModel GetProfessorDetail(int professionId);
+        public ProfessorViewModel GetProfessorDetail(int professorId);
         public StudentViewModel GetStudentDetails(int studentId);
     }
 }

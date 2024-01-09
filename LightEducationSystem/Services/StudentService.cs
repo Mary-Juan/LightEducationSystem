@@ -47,12 +47,12 @@ namespace LightEducationSystem.Services
             }).ToList();
         }
 
-        public ProfessorViewModel GetProfessorDetail(int professionId)
+        public ProfessorViewModel GetProfessorDetail(int professorId)
         {
-            var professor = _professorRepository.GetByID(professionId);
+            var professor = _professorRepository.GetByID(professorId);
             List<TrainingCourseViewModel> trainingCourses = _trainingCourseRepository.GetAll().Where(t => professor.TrainingCoursesId.Contains(t.Id)).Select(t => new TrainingCourseViewModel
             {
-                ProfessorId=professionId,
+                ProfessorId=professorId,
                 Capacity = t.Capacity,
                 Time = t.Time,
                 Title = t.Title,
@@ -67,9 +67,9 @@ namespace LightEducationSystem.Services
             };
         }
 
-        public List<TrainingCourseViewModel> GetProfessorTrainingCourse(int professionId)
+        public List<TrainingCourseViewModel> GetProfessorTrainingCourse(int professorId)
         {
-            var professor = GetProfessorDetail(professionId);
+            var professor = GetProfessorDetail(professorId);
             return professor.TrainingCourses;
         }
 

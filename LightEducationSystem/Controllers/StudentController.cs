@@ -13,12 +13,16 @@ namespace LightEducationSystem.Controllers
         {
             _studentService = studentService;
             _currentUser = currentUserService.GetCurrentUser();
-
         }
 
         public IActionResult Index(int studentId)
         {
-            return View(_studentService.GetStudentDetails);
+            var student = _studentService.GetStudentDetails;
+
+            if (student == null)
+                return NotFound();
+
+            return View(student);
         }
 
         public IActionResult GetAllTrainingCourse()
@@ -46,6 +50,31 @@ namespace LightEducationSystem.Controllers
         public IActionResult GetStudentCourses()
         {
             return View(_studentService.GetStudentTrainingCourse(_currentUser.Id));
+        } 
+        
+        public IActionResult GetProfessorDetail(int professorId)
+        {
+            var professor = _studentService.GetProfessorDetail(professorId);
+
+            if (professor == null)
+                return NotFound();
+
+            return View(professor);
+        }
+
+        public IActionResult GetProfessorTrainingCourse(int professorId)
+        {
+            return View(_studentService.GetProfessorTrainingCourse(professorId));
+        }
+
+        public IActionResult GetTrainingCourseDetail(int trainingCourseId)
+        {
+            var trainingCourse = _studentService.GetTrainingCourseDetail(trainingCourseId);
+
+            if (trainingCourse == null)
+                return NotFound();
+
+            return View(trainingCourse);
         }
     }
 }
