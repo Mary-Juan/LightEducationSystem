@@ -24,26 +24,23 @@ namespace LightEducationSystem.Controllers
             return View();
         }
 
-        [HttpPost]
         public IActionResult Login(LoginViewModel login)
         {
-            if (ModelState.IsValid)
-                return View(login);
+           var person = _authenticationService.Login(login);
 
-            var user = _authenticationService.Login(login);
-
-            if (user == null)
+            if (person == null)
             {
+                ViewBag.NotRegistered = "User Not Found. please register first.";
                 return RedirectToAction("Register");
             }
 
-            _currentUserService.AddCurrentUser(user);
+            _currentUserService.AddCurrentUser(person);
 
-            if (user.role.Id == 2)
-                return RedirectToAction("Index", "Student", user.Id);
+            if (person.role.Id == 2)
+                return RedirectToAction("Index", "Student", person.Id);
 
-            if (user.role.Id == 1)
-                return RedirectToAction("Index", "Professor", user.Id);
+            if (person.role.Id == 1)
+                return RedirectToAction("Index", "Professor", person.Id);
 
             return BadRequest();
         }
@@ -84,6 +81,10 @@ namespace LightEducationSystem.Controllers
             }
         }
 
+        public IActionResult Contact()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,0 +1,24 @@
+.card {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+.form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+}
+
+.form-control::placeholder {
+    color: lightgray;
+}
+
+.btn-primary {
+    background-color: rgb(255, 217, 0);
+    border-color: gold;
+}
+
+.btn-primary:hover {
+    background-color: darkgoldenrod;
+    border-color: darkgoldenrod;
+}
