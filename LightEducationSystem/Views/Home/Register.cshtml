@@ -1,0 +1,40 @@
+﻿@using LightEducationSystem.ViewModels;
+@model RegisterViewModel
+@{
+    ViewData["CurrentNavItem"] = "(current)";
+}
+
+
+
+<div class="container">
+    <div class="row justify-content-center align-items-center my-5 py-5" >
+        <div class="col-8">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="Register" asp-controller="Home">
+                        <div class="form-group">
+                            <label asp-for="Email">Email</label>
+                            <input asp-for="Email" type="text" class="form-control" id="email" placeholder="Enter Your Email">
+                        </div>
+                        <div class="form-group">
+                                <label asp-for="UserName">Username</label>
+                                <input asp-for="UserName" type="text" class="form-control" id="username" placeholder="Enter username">
+                            </div>
+                        <div class="form-group">
+                            <label asp-for="Password">Password</label>
+                            <input asp-for="Password" type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+
+                        @Html.DropDownListFor(model => model.RoleId, @ViewBag.Roles as List<SelectListItem>, "Are you student or professor?", new { @class = "form-control mb-2" })
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

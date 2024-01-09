@@ -9,10 +9,10 @@ builder.Services.AddControllersWithViews();
 
 #region IOC
 
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
 builder.Services.AddSingleton<ICurrentUserService, CurrentUserService>();
-builder.Services.AddScoped<IProfessorService, ProfessorService>();
-builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddSingleton<IProfessorService, ProfessorService>();
+builder.Services.AddSingleton<IStudentService, StudentService>();
 
 #endregion
 

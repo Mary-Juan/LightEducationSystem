@@ -24,6 +24,7 @@ namespace LightEducationSystem.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Login(LoginViewModel login)
         {
            var person = _authenticationService.Login(login);
