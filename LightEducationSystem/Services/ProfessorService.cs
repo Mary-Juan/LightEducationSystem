@@ -105,12 +105,12 @@ namespace LightEducationSystem.Services
             return students;
         }
 
-        public bool RateStudent(int studentId, int score)
+        public bool RateStudent(StudentCardViewModel inputCard)
         {
             try
             {
-                var card = _trainingCourseStudentCardRepository.GetAll().FirstOrDefault(c => c.StudentId == studentId);
-                card.Score = score;
+                var card = _trainingCourseStudentCardRepository.GetAll().FirstOrDefault(c => c.StudentId == inputCard.StudentId && c.TrainingCourseId == inputCard.TrainingCourseId);
+                card.Score = inputCard.Score;
                 _trainingCourseStudentCardRepository.SaveChanges();
                 return true;
             }

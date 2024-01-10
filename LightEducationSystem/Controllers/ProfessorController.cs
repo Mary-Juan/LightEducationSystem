@@ -68,11 +68,21 @@ namespace LightEducationSystem.Controllers
             return View(_professorService.GetStudentsOfTrainingCourse(trainingCourseId));
         }
 
-        public IActionResult RateStudent(int studentId, int score)
+        public IActionResult RateStudent(int courseId, int studentId)
+        {
+            return View(new StudentCardViewModel()
+            {
+                TrainingCourseId = courseId,
+                StudentId = studentId
+            });
+        }
+
+        [HttpPost]
+        public IActionResult RateStudent( StudentCardViewModel inputCard)
         {
             try
             {
-                return View(_professorService.RateStudent(studentId, score));
+                return View(_professorService.RateStudent(inputCard));
             }
             catch
             {

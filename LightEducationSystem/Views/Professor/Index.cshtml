@@ -21,8 +21,8 @@
                             <p>Remaining Capacity: <span class="badge bg-secondary">@course.RemainingCapacity</span></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button asp-action="GetStudentsOfTrainingCourse" asp-route-data=@course.Id type="button" class="btn btn-sm btn-custom mx-1">View Students</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit</button>
+                                    <a asp-action="GetStudentsOfTrainingCourse" asp-controller="Professor" asp-route-trainingCourseId=@course.Id  class="btn btn-sm btn-custom mx-1">View Students</a>
+                                    <a  class="btn btn-sm btn-outline-secondary" disabled>Edit</a>
                                 </div>
                                 <small class="text-muted">@course.TotalTime</small>
                             </div>

@@ -1,1 +1,32 @@
-﻿
+﻿@using LightEducationSystem.ViewModels
+@model List<StudentCardViewModel>
+
+@{
+    Layout = "_ProfessorLayout";
+    ViewData["ProfessorName"] = ViewBag.UserName;
+}
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">UserName</th>
+            <th scope="col">Score</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var card in Model)
+        {
+            <tr>
+                <td>@card.StudentName</td>
+                <td>@card.Score</td>
+                <td>
+                   <div class="row">
+                        <a asp-action="RateStudent" asp-route=@( new{courseId = card.TrainingCourseId, studentId= card.StudentId}) class="btn btn-secondary my-2">Change Score</a>
+                        <a class="btn btn-custom text-white">Remove</a> @* route it later. *@
+                   </div>
+                    </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -36,6 +36,7 @@ namespace LightEducationSystem.Controllers
             }
 
             _currentUserService.AddCurrentUser(person);
+            ViewBag.UserName = _currentUserService.GetCurrentUser().UserName;
 
             if (person.role.Id == 2)
                 return RedirectToAction("Index", "Student", new { studentId = person.Id });
