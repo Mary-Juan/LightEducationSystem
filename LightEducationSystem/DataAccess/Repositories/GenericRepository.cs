@@ -37,7 +37,10 @@ namespace LightEducationSystem.DataAccess.Repositories
             try
             {
                 T obj = GetByID(id);
-                obj.IsDeleted = true;
+
+                if(obj!=null)
+                    obj.IsDeleted = true;
+
                 return true;
             }
             catch (Exception ex)

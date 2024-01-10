@@ -35,7 +35,12 @@ namespace LightEducationSystem.Controllers
 
         public IActionResult AddTrainingCourse()
         {
-            return View();
+            return View(new TrainingCourseViewModel()
+            {
+                Id = _currentUser.Id,
+                ProfessorId = _currentUser.Id,
+                ProfessorName = _currentUser.UserName
+            });
         }
 
         [HttpPost]
@@ -49,6 +54,7 @@ namespace LightEducationSystem.Controllers
             try
             {
                 _professorService.AddTrainingCourse(trainingCourse, _currentUser.Id);
+                return RedirectToAction("Index", new { professorId = _currentUser.Id });
             }
             catch
             {

@@ -56,7 +56,7 @@ namespace LightEducationSystem.DataAccess.Repositories
 
         public Professor GetByID(int id)
         {
-            return _objects.FirstOrDefault(o => o.Id == id && o.IsDeleted != false);
+            return _objects.FirstOrDefault(o => o.Id == id && o.IsDeleted == false);
         }
 
         public void SaveChanges()

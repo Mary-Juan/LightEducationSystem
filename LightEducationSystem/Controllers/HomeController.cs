@@ -38,10 +38,10 @@ namespace LightEducationSystem.Controllers
             _currentUserService.AddCurrentUser(person);
 
             if (person.role.Id == 2)
-                return RedirectToAction("Index", "Student", person.Id);
+                return RedirectToAction("Index", "Student", new { studentId = person.Id });
 
             if (person.role.Id == 1)
-                return RedirectToAction("Index", "Professor", person.Id);
+                return RedirectToAction("Index", "Professor", new { professorId = person.Id });
 
             return BadRequest();
         }

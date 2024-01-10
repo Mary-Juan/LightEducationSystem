@@ -42,7 +42,7 @@ namespace LightEducationSystem.Services
                 Capacity = x.Capacity,
                 ProfessorId = x.ProfessorId,
                 Title = x.Title,
-                Time = x.Time,
+                TotalTime = x.Time,
                 RemainingCapacity = x.Capacity - x.TrainingCourseStudentCardsId.Count()
             }).ToList();
         }
@@ -54,7 +54,7 @@ namespace LightEducationSystem.Services
             {
                 ProfessorId=professorId,
                 Capacity = t.Capacity,
-                Time = t.Time,
+                TotalTime = t.Time,
                 Title = t.Title,
                 RemainingCapacity = t.Capacity - t.TrainingCourseStudentCardsId.Count()
             }).ToList();
@@ -104,7 +104,7 @@ namespace LightEducationSystem.Services
 
             return new TrainingCourseViewModel()
             {
-                Time = trainingCourse.Time,
+                TotalTime = trainingCourse.Time,
                 Capacity = trainingCourse.Capacity,
                 ProfessorId = trainingCourse.ProfessorId,
                 Title = trainingCourse.Title,

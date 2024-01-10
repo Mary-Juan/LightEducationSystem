@@ -44,21 +44,27 @@ namespace LightEducationSystem.Services
             {
                 Id = _trainingCourseRepository.GetAll().Count + 1,
                 Title = trainingCourse.Title,
-                Time = trainingCourse.Time,
+                Time = trainingCourse.EndTime.Subtract(trainingCourse.StartTime),
                 Capacity = trainingCourse.Capacity,
-                ProfessorId = professorId
+                ProfessorId = professorId,
+                Detail = trainingCourse.Detail,
+                ImageName = trainingCourse.ImageName
             };
 
             try
             {
-                var imageExtention = Path.GetExtension(trainingCourse.Image.FileName).Trim();
-                string imageFilePath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","imgs", newTrainingCourse.Id + imageExtention);
-                newTrainingCourse.ImageAddress = imageFilePath;
-
-                using (var stream = new FileStream(imageFilePath, FileMode.Create))
+                if(trainingCourse.Image != null)
                 {
-                    trainingCourse.Image.CopyTo(stream);
+                    var imageExtention = Path.GetExtension(trainingCourse.Image.FileName).Trim();
+                    string imageFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "imgs", newTrainingCourse.Id + imageExtention);
+                    newTrainingCourse.ImageName = newTrainingCourse.Id + imageExtention;
+
+                    using (var stream = new FileStream(imageFilePath, FileMode.Create))
+                    {
+                        trainingCourse.Image.CopyTo(stream);
+                    }
                 }
+                
 
                 _trainingCourseRepository.Create(newTrainingCourse);
                 _trainingCourseRepository.SaveChanges();
@@ -120,12 +126,14 @@ namespace LightEducationSystem.Services
             var professor = _professorRepository.GetByID(professorId);
             List<TrainingCourseViewModel> trainingCourses = _trainingCourseRepository.GetAll().Where(t => professor.TrainingCoursesId.Contains(t.Id)).Select(t => new TrainingCourseViewModel
             {
+                ProfessorName = professor.UserName,
                 Id = t.Id,
                 ProfessorId = professorId,
                 Capacity = t.Capacity,
-                Time = t.Time,
+                TotalTime = t.Time,
                 Title = t.Title,
-                ImageAddress = t.ImageAddress,
+                ImageName = t.ImageName,
+                Detail = t.Detail,
                 RemainingCapacity = t.Capacity - t.TrainingCourseStudentCardsId.Count()
             }).ToList();
 

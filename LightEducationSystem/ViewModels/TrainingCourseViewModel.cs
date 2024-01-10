@@ -14,15 +14,20 @@ namespace LightEducationSystem.ViewModels
         public int Capacity { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
-        public TimeSpan Time { get; set; }
+        public TimeSpan StartTime { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
+        public TimeSpan EndTime { get; set; }
+
+        public TimeSpan? TotalTime { get; set; }
+
         public int ProfessorId { get; set; }
 
-        [Required(ErrorMessage = "{0} is required.")]
-        public int RemainingCapacity { get; set; }
+        public string? ProfessorName { get; set; }
 
-        public string? ImageAddress { get; set; } = Directory.GetCurrentDirectory() + "wwwroot" + "imgs" + "DefaultTrainingCourseImage.jpg";
+        public int? RemainingCapacity { get; set; }
+
+        public string? ImageName { get; set; } = "DefaultTrainingCourseImage.jpg";
         public IFormFile? Image { get; set; }
 
         public string? Detail { get; set; }
