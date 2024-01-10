@@ -1,0 +1,21 @@
+﻿body {
+    background-color: darkslateblue;
+    color: aliceblue;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+    font-size: medium;
+}
+
+.courses {
+    background-color: #03A88B; 
+}
+
+.btn-custom {
+    background-color: #03A88B;
+}

@@ -13,5 +13,7 @@ namespace LightEducationSystem.Entities
         public int ProfessorId { get; set; }
         public List<int> TrainingCourseStudentCardsId { get; set; } = new List<int>();
         public TimeSpan Time { get; set; }
+        public string? ImageAddress { get; set; }
+        public string Detail { get; set; }
     }
 }

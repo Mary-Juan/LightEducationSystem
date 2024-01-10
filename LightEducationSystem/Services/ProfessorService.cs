@@ -3,6 +3,7 @@ using LightEducationSystem.DataAccess.Repositories.Interfaces;
 using LightEducationSystem.Entities;
 using LightEducationSystem.Services.Interfaces;
 using LightEducationSystem.ViewModels;
+using System.IO;
 
 namespace LightEducationSystem.Services
 {
@@ -20,6 +21,7 @@ namespace LightEducationSystem.Services
         private readonly IStudentRepository _studentRepository;
         private readonly string _studentFilePath;
 
+
         public ProfessorService(IConfiguration configuration)
         {
             _trainingCourseFilePath = configuration["FileAddresses:TrainingCourseFilePath"];
@@ -34,7 +36,6 @@ namespace LightEducationSystem.Services
             _studentFilePath = configuration["FileAddresses:StudentFilePath"];
             _studentRepository = new StudentRepository(_studentFilePath);
 
-
         }
 
         public bool AddTrainingCourse(TrainingCourseViewModel trainingCourse, int professorId)
@@ -45,11 +46,20 @@ namespace LightEducationSystem.Services
                 Title = trainingCourse.Title,
                 Time = trainingCourse.Time,
                 Capacity = trainingCourse.Capacity,
-                ProfessorId = professorId,
+                ProfessorId = professorId
             };
 
             try
             {
+                var imageExtention = Path.GetExtension(trainingCourse.Image.FileName).Trim();
+                string imageFilePath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","imgs", newTrainingCourse.Id + imageExtention);
+                newTrainingCourse.ImageAddress = imageFilePath;
+
+                using (var stream = new FileStream(imageFilePath, FileMode.Create))
+                {
+                    trainingCourse.Image.CopyTo(stream);
+                }
+
                 _trainingCourseRepository.Create(newTrainingCourse);
                 _trainingCourseRepository.SaveChanges();
                 Professor professor = _professorRepository.GetByID(professorId);
@@ -110,10 +120,12 @@ namespace LightEducationSystem.Services
             var professor = _professorRepository.GetByID(professorId);
             List<TrainingCourseViewModel> trainingCourses = _trainingCourseRepository.GetAll().Where(t => professor.TrainingCoursesId.Contains(t.Id)).Select(t => new TrainingCourseViewModel
             {
+                Id = t.Id,
                 ProfessorId = professorId,
                 Capacity = t.Capacity,
                 Time = t.Time,
                 Title = t.Title,
+                ImageAddress = t.ImageAddress,
                 RemainingCapacity = t.Capacity - t.TrainingCourseStudentCardsId.Count()
             }).ToList();
 

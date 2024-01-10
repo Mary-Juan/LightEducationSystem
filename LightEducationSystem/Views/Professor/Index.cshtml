@@ -1,0 +1,36 @@
+﻿@using LightEducationSystem.ViewModels
+@model ProfessorViewModel
+
+@{
+    Layout = "_ProfessorLayout";
+    ViewData["ProfessorName"] = Model.UserName;
+}
+
+@foreach(var course in Model.TrainingCourses)
+{
+    <div class="album py-5  courses">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" src=@course.ImageAddress>
+                        <h1>@course.Title</h1>
+                        <div class="card-body">
+                            <p class="card-text">@course.Detail</p>
+                            <p>Capacity: <span class="badge bg-secondary">@course.Capacity</span></p>
+                            <p>Remaining Capacity: <span class="badge bg-secondary">@course.RemainingCapacity</span></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button asp-action="GetStudentsOfTrainingCourse" asp-route-data=@course.Id type="button" class="btn btn-sm btn-custom mx-1">View Students</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit</button>
+                                </div>
+                                <small class="text-muted">@course.Time</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
