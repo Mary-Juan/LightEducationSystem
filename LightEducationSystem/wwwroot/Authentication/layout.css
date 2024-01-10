@@ -1,5 +1,5 @@
 body {
-   background-color: black;
+   background-color: yellow;
     background: linear-gradient(to right, rgba(139, 0, 0, 0.829), rgba(85, 0, 0, 0.7)), url('your-image-url.jpg') no-repeat center center;
 }
 
@@ -25,6 +25,6 @@ body {
 }
 
 .features-icons {
-    padding: 7
+    padding: 7;
 
 }

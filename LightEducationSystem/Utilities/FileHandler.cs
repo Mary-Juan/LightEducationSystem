@@ -15,6 +15,8 @@ namespace LightEducationSystem.Utilities
 
         public static string[] ReadFile(string filePath)
         {
+            if (!File.Exists(filePath))
+                File.Create(filePath).Close();
             return File.ReadAllLines(filePath);
         }
     }
